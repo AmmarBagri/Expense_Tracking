@@ -1,0 +1,41 @@
+{% extends 'base_auth.html' %}
+{% load static %}
+
+{% block content %}
+<div class="auth-card">
+    <div class="card-body p-4">
+        <div class="card-title mb-4">
+            <h4 class="text-center">Login to your account</h4>
+        </div>
+        <form action="{% url 'login' %}" method="post">
+            {% csrf_token %}
+            {% include 'partials/_messages.html' %}
+            
+            <div class="form-group mb-3">
+                <input type="text" 
+                       name="username" 
+                       placeholder="Username" 
+                       id="usernameField"
+                       class="form-control form-control-lg"
+                       {% if fieldValues.username %}
+                       value="{{fieldValues.username}}"
+                       {% endif %}
+                />
+            </div>
+            <div class="form-group mb-3">
+                <input type="password" 
+                       name="password" 
+                       placeholder="Password" 
+                       class="form-control form-control-lg" 
+                       id="passwordField" />
+            </div>
+            <div class="d-grid">
+                <input type="submit" value="Login" class="btn btn-primary btn-lg" />
+            </div>
+        </form>
+        <div class="text-center mt-3">
+            <p>Don't have an account? <a href="{% url 'register' %}" class="text-primary">Register here</a></p>
+        </div>
+    </div>
+</div>
+{% endblock %}
